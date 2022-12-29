@@ -1,0 +1,9 @@
+package com.ezen.myProject.repogitory;
+
+import com.ezen.myProject.domain.fileVO;
+
+public interface FileDAO {
+
+	int insertFile(fileVO fvo);
+
+}

@@ -1,0 +1,5 @@
+package com.ezen.myProject.service;
+
+public interface CommentService {
+
+}

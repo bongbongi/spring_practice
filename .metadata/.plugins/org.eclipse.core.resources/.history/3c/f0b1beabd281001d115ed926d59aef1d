@@ -1,0 +1,82 @@
+package com.ezen.myProject.service;
+
+import java.util.List;
+
+import javax.inject.Inject;
+
+import org.slf4j.Logger;
+import org.springframework.stereotype.Service;
+
+import com.ezen.myProject.domain.BoardVO;
+import com.ezen.myProject.domain.PagingVO;
+import com.ezen.myProject.domain.UserVO;
+import com.ezen.myProject.handler.PagingHandler;
+import com.ezen.myProject.repogitory.BoardDAO;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Service
+public class BoardServiceImple implements BoardService {
+
+	@Inject
+	private BoardDAO bdao;
+
+	@Override
+	public int register(BoardVO bvo) {
+		
+		return bdao.insertBoard(bvo);
+	}
+
+	@Override
+	public List<BoardVO> getList() {
+		return bdao.selectBoardList();
+	}
+
+	@Override
+	public BoardVO getDetail(int bno) {
+		bdao.readCountUp(bno);
+		return bdao.getDetail(bno);
+	}
+
+	@Override
+	public int modify(BoardVO bvo, UserVO user) {
+		log.info(">>> board modify check2");
+		BoardVO tmpBoard = bdao.getDetail(bvo.getBno());
+		log.info("tmpBoard : "+tmpBoard.toString());
+		/* log.info("user : "+user.toString()); */
+		if(user ==null || !user.getId().equals(tmpBoard.getWriter())) {
+			return 0;
+		}
+		return bdao.updateBoard(bvo);
+	}
+
+	@Override
+	public int getdelete(int bno) {
+		return bdao.getdelete(bno);
+	}
+
+	@Override
+	public List<BoardVO> getList(PagingVO pvo) {
+		log.info(">>> PagingVO list check2");
+		return bdao.selectBoardListPaging(pvo);
+	}
+
+	@Override
+	public int totalCount() {
+		return bdao.totalCount();
+	}
+
+	@Override
+	public List<BoardVO> getList(PagingHandler ph) {
+		return bdao.pageList(ph);
+	}
+
+	@Override
+	public int searchTotalCount(pvo) {
+		return bdao.totalCount(pvo);
+	}
+	
+	
+
+}

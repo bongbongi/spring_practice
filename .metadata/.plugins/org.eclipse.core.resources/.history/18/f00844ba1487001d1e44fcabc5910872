@@ -1,0 +1,14 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<div class="container-fluid">2022 Spring Project</div>
+
+</body>
+<style>
+	.container-fluid{
+	text-align: center;
+	height: 150px;
+	background-color: gray;
+	}
+</style>
+</html>

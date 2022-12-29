@@ -1,0 +1,49 @@
+-- 2022-12-26
+	create table comment(
+	cno int auto_increment,
+	bno int not null,
+	writer varchar(100) not null,
+	content text not null,
+	reg_at datetime default now(),
+	mod_at datetime default now(),
+	primary key(cno)
+	);
+
+-- 2022-12-21
+-- pw 암호화 설정때문에 수정
+	alter table user modify pw varchar(500) not null;
+	 alter table board modify read_count int default 0;
+	  update board set read_count =1;
+-- 2022-12-20
+	create database springdb;
+	
+	use springdb;
+	
+	-- 유저 생성 구문
+	create user springuser@localhost identified by 'mysql';
+	
+	-- 권한 생성 구문
+	grant all privileges on springdb.* to springuser@localhost identified by 'mysql';
+	
+	-- 변경내용 메모리에 반영
+	flush privileges;
+	
+	-- 테이블 생성 구문
+	create table board(
+	bno int not null auto_increment,
+	title varchar(200),
+	content text,
+	writer varchar(100),
+	isDel varchar(50) default "N",
+	registerDate datetime default now(),
+	read_count int,
+	primary key(bno));
+	
+	create table user(
+	id varchar(100) not null,
+	pw varchar(100) not null,
+	age int,
+	name varchar(100),
+	email varchar(100),
+	home varchar(100),
+	primary key(id));

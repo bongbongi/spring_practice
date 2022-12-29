@@ -1,0 +1,5 @@
+package com.ezen.myProject.controller;
+
+public class CommentController {
+
+}

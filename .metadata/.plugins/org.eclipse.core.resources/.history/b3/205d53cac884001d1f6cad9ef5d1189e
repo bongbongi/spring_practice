@@ -1,0 +1,36 @@
+package com.ezen.myProject.controller;
+
+import javax.inject.Inject;
+
+import org.apache.ibatis.io.ResolverUtil.Test;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.ezen.myProject.domain.CommentVO;
+import com.ezen.myProject.service.CommentService;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@RequestMapping("comment/*")
+@Controller
+public class CommentController {
+	
+	@Inject
+	private CommentService csv;
+	
+	/* value:mapping값 설정
+	 * consumes:가져오는 값의 형태(application/json)
+	 * produces: 보낼 때 형태{MediaType.test_plain_value}
+	 */
+	@PostMapping(value = "/post",consumes = "application/json",produces = {MediaType.TEXT_PLAIN_VALUE})
+	public ResponseEntity<String> post(@RequestBody CommentVO cvo){
+		log.info(">>> comment post : "+cvo.toString());
+		return "";
+	}
+	
+}
